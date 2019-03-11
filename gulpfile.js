@@ -29,4 +29,12 @@ gulp.task('css', function () {
         .pipe(gulp.dest('css'));
 });
 
+gulp.task('dist', function(){
+    gulp.src(filesExist('js/**')).pipe(gulp.dest('dist/js'));
+    gulp.src(filesExist('css/**')).pipe(gulp.dest('dist/css'));
+    gulp.src(filesExist('index.html')).pipe(gulp.dest('dist'));
+    gulp.src(filesExist('proxy.php')).pipe(gulp.dest('dist'));
+});
+
 gulp.task('default', ['js', 'css'], function () {});
+gulp.task('build', ['js', 'css', 'dist'], function () {});
