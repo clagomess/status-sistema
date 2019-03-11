@@ -4,10 +4,81 @@
     <meta charset="UTF-8">
     <title>status-sistema</title>
     <link rel="stylesheet" type="text/css" href="css/build-styles.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 
+<nav class="navbar navbar-dark bg-dark mb-3">
+    <a class="navbar-brand" href="#">status-sistema</a>
+</nav>
+
+<div id="content" class="container-fluid"></div>
 
 <script type="text/javascript" src="js/build-scripts.min.js"></script>
+<script type="text/javascript">
+    let template = Handlebars.compile(`
+    {{#each grupo}}
+        <h3>{{nomGrupo}}</h3>
+        <div class="card-deck">
+            {{#each host}}
+                <div desUrl="{{desUrl}}" class="card bg-light">
+                    <div class="card-body">
+                        <h5 class="card-title">{{nomHost}}</h5>
+                        <ul class="card-text">
+                            <li>Obtendo informações</li>
+                        </ul>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{/each}}
+    `);
+
+    function checkStatus(obj){
+        let url = $(obj).attr('desUrl');
+
+        $.ajax({
+            "type": "GET",
+            "dataType": "json",
+            "url": "proxy.php?url=" + encodeURIComponent(url),
+            "timeout": 1000
+        }).done(function(info){
+            $(obj).removeClass('bg-light');
+            $(obj).removeClass('bg-danger');
+            $(obj).removeClass('text-white');
+
+            $(obj).addClass('bg-success');
+            $(obj).addClass('text-white');
+
+            $(obj).find('.card-text').html('');
+
+            for(let key in info){
+                $(obj).find('.card-text').append('<li>'+key+': '+info[key]+'</li>')
+            }
+        }).fail(function (data) {
+            $(obj).removeClass('bg-light');
+            $(obj).removeClass('bg-success');
+            $(obj).removeClass('text-white');
+
+            $(obj).addClass('bg-danger');
+            $(obj).addClass('text-white');
+
+            $(obj).find('.card-text').html(data);
+
+            console.log(data);
+        });
+    }
+
+    $.ajax({
+        "type": "GET",
+        "dataType": "json",
+        "url": "config.json"
+    }).done(function(data){
+        $('#content').html(template(data));
+        $('#content .card').each(function(){
+            checkStatus($(this));
+        });
+    });
+</script>
 </body>
 </html>

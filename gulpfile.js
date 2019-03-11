@@ -8,7 +8,8 @@ let filesExist = require('files-exist');
 gulp.task('js', function () {
     gulp.src(filesExist([
         'node_modules/jquery/dist/jquery.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js'
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/handlebars/dist/handlebars.js',
     ]))
         .pipe(sourcemaps.init())
         .pipe(concat('build-scripts.min.js', {newLine: ";\r\n"}))
