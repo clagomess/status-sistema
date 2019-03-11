@@ -34,6 +34,20 @@
     {{/each}}
     `);
 
+    function parse(status){
+        var html = "";
+
+        if(!status){
+            return html;
+        }
+
+        for(let key in status){
+            html += '<li>'+key+': '+status[key]+'</li>';
+        }
+
+        return html;
+    }
+
     function checkStatus(obj){
         let url = $(obj).attr('desUrl');
 
@@ -41,7 +55,6 @@
             "type": "GET",
             "dataType": "json",
             "url": "proxy.php?url=" + encodeURIComponent(url),
-            "timeout": 1000
         }).done(function(info){
             $(obj).removeClass('bg-light');
             $(obj).removeClass('bg-danger');
@@ -50,12 +63,8 @@
             $(obj).addClass('bg-success');
             $(obj).addClass('text-white');
 
-            $(obj).find('.card-text').html('');
-
-            for(let key in info){
-                $(obj).find('.card-text').append('<li>'+key+': '+info[key]+'</li>')
-            }
-        }).fail(function (data) {
+            $(obj).find('.card-text').html(parse(info));
+        }).fail(function (response, status, xhr) {
             $(obj).removeClass('bg-light');
             $(obj).removeClass('bg-success');
             $(obj).removeClass('text-white');
@@ -63,9 +72,15 @@
             $(obj).addClass('bg-danger');
             $(obj).addClass('text-white');
 
-            $(obj).find('.card-text').html(data);
-
-            console.log(data);
+            $(obj).find('.card-text')
+                .html('')
+                .append('<li>'+status+': '+xhr+'</li>')
+                .append(parse(response.responseJSON));
+        }).always(function(){
+            console.log("talkey");
+            window.setTimeout(function () {
+                checkStatus(obj);
+            }, 10000);
         });
     }
 
