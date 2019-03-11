@@ -1,0 +1,21 @@
+{
+  "grupo": [
+    {
+      "nomGrupo": "grupo teste",
+      "hosts": [
+        {
+          "nomHost": "ok",
+          "desUrl": "https://postman-echo.com/status/200"
+        },
+        {
+          "nomHost": "delay 3s",
+          "desUrl": "https://postman-echo.com/delay/3"
+        },
+        {
+          "nomHost": "status != 200",
+          "desUrl": "https://postman-echo.com/status/500"
+        }
+      ]
+    }
+  ]
+}

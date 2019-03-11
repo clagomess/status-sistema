@@ -1,0 +1,31 @@
+{
+  "name": "status-sistema",
+  "version": "1.0.0",
+  "description": "status-sistema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clagomess/status-sistema.git"
+  },
+  "author": "Claudio Gomes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clagomess/status-sistema/issues"
+  },
+  "homepage": "https://github.com/clagomess/status-sistema#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "files-exist": "^1.1.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^1.12.1",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7"
+  }
+}
