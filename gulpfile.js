@@ -37,4 +37,3 @@ gulp.task('dist', function(){
 });
 
 gulp.task('default', ['js', 'css'], function () {});
-gulp.task('build', ['js', 'css', 'dist'], function () {});

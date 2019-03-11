@@ -1,5 +1,5 @@
 .idea
 /css
-/js
+/js/build-scripts.min.js
 /node_modules
 /dist
