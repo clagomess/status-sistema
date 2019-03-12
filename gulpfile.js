@@ -21,6 +21,7 @@ gulp.task('js', function () {
 gulp.task('css', function () {
     gulp.src(filesExist([
         'node_modules/bootstrap/dist/css/bootstrap.css',
+        'css/sistema-info.css',
     ]))
         .pipe(sourcemaps.init())
         .pipe(concat('build-styles.min.css'))

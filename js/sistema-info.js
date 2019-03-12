@@ -1,16 +1,14 @@
 let template = Handlebars.compile(`
     {{#each grupo}}
         <h3>{{nomGrupo}}</h3>
-        <div class="card-deck">
+        <div class="card-deck mb-3">
             {{#each host}}
-                <div desUrl="{{desUrl}}" class="card bg-light">
+                <a target="_blank" href="{{desUrl}}" class="card bg-light">
+                    <div class="card-header"><strong>{{nomHost}}</strong></div>
                     <div class="card-body">
-                        <h5 class="card-title">{{nomHost}}</h5>
-                        <ul class="card-text">
-                            <li>Obtendo informações</li>
-                        </ul>
+                        Obtendo informações
                     </div>
-                </div>
+                </a>
             {{/each}}
         </div>
     {{/each}}
@@ -24,14 +22,14 @@ function parse(status){
     }
 
     for(let key in status){
-        html += '<li>'+key+': '+status[key]+'</li>';
+        html += key+': '+status[key]+'<br>';
     }
 
     return html;
 }
 
 function checkStatus(obj){
-    let url = $(obj).attr('desUrl');
+    let url = $(obj).attr('href');
 
     $.ajax({
         "type": "GET",
@@ -45,7 +43,7 @@ function checkStatus(obj){
         $(obj).addClass('bg-success');
         $(obj).addClass('text-white');
 
-        $(obj).find('.card-text').html(parse(info));
+        $(obj).find('.card-body').html(parse(info));
     }).fail(function (response, status, xhr) {
         $(obj).removeClass('bg-light');
         $(obj).removeClass('bg-success');
@@ -54,12 +52,11 @@ function checkStatus(obj){
         $(obj).addClass('bg-danger');
         $(obj).addClass('text-white');
 
-        $(obj).find('.card-text')
+        $(obj).find('.card-body')
             .html('')
-            .append('<li>'+status+': '+xhr+'</li>')
+            .append(status+': '+xhr+'<br>')
             .append(parse(response.responseJSON));
     }).always(function(){
-        console.log("talkey");
         window.setTimeout(function () {
             checkStatus(obj);
         }, 10000);

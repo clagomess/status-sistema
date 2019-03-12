@@ -2,7 +2,7 @@
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $_REQUEST['url']);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch,CURLOPT_TIMEOUT,1);
+curl_setopt($ch,CURLOPT_TIMEOUT,3);
 
 $httpBody = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

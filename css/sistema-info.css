@@ -1,0 +1,7 @@
+body {
+    font-size: 12px;
+}
+
+a.card:hover {
+    text-decoration: none;
+}
