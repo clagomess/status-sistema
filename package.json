@@ -21,12 +21,12 @@
     "files-exist": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.2",
-    "gulp-cli": "^2.0.1",
+    "gulp-cli": "^2.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-sourcemaps": "^1.12.1",
     "gulp-uglify": "^3.0.0",
     "handlebars": "^4.1.2",
-    "jquery": "^3.4.0",
-    "popper.js": "^1.14.7"
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0"
   }
 }
