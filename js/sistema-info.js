@@ -4,7 +4,10 @@ let template = Handlebars.compile(`
         <div class="card-deck mb-3">
             {{#each host}}
                 <a target="_blank" href="{{desUrl}}" class="card bg-light">
-                    <div class="card-header"><strong>{{nomHost}}</strong></div>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <strong>{{nomHost}}</strong>
+                        <span class="badge badge-light">-</span>
+                    </div>
                     <div class="card-body">
                         Obtendo informações
                     </div>
@@ -30,6 +33,8 @@ function parse(status){
 
 function checkStatus(obj){
     let url = $(obj).attr('href');
+
+    let initTime = (new Date()).getTime();
 
     $.ajax({
         "type": "GET",
@@ -57,6 +62,10 @@ function checkStatus(obj){
             .append(status+': '+xhr+'<br>')
             .append(parse(response.responseJSON));
     }).always(function(){
+        let totalTime = (new Date().getTime()) - initTime;
+
+        $(obj).find('.badge').text(totalTime + " ms");
+
         window.setTimeout(function () {
             checkStatus(obj);
         }, 10000);
