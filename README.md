@@ -3,11 +3,11 @@
 Buid:
 ```bash
 npm install
-gulp
+npm run serve
 
 # production
 sh -xe jenkins_build.sh
-gulp dist
+npm run build
 ```
 
 Image:

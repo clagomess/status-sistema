@@ -11,6 +11,6 @@ fi
 GIT_COMMIT=`echo $GIT_COMMIT | cut -c 1-7`
 GIT_TAG=`git describe --tags --abbrev=0 | sed 's/v//g'`
 
-sed -i -- "s/0.0.0/$GIT_TAG/g" index.html
-sed -i -- "s/##date##/$DATE_DEPLOY/g" index.html
-sed -i -- "s/##commit##/$GIT_COMMIT/g" index.html
+sed -i -- "s/0.0.0/$GIT_TAG/g" src/index.html
+sed -i -- "s/##date##/$DATE_DEPLOY/g" src/index.html
+sed -i -- "s/##commit##/$GIT_COMMIT/g" src/index.html
