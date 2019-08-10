@@ -5,3 +5,14 @@ body {
 a.card:hover {
     text-decoration: none;
 }
+
+.card-deck .card {
+    max-width: 400px;
+}
+
+@media (min-width: 576px) {
+    .card-deck .card {
+        min-width: 200px;
+        margin-bottom: 15px;
+    }
+}
