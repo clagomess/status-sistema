@@ -1,6 +1,6 @@
 {
   "name": "status-sistema",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "status-sistema",
   "main": "index.js",
   "scripts": {
