@@ -34,7 +34,6 @@ module.exports = {
             {from: 'node_modules/bootstrap/dist/css/bootstrap.min.css'},
             {from: './src/sistema-info.css'},
             {from: './src/proxy.php'},
-            {from: './src/config.json'},
         ]),
         new HtmlWebpackPlugin({
             template: "./src/index.html"
@@ -48,6 +47,10 @@ module.exports = {
         before: app => {
             app.get('/proxy.php', (req, res) => {
                request.get(req.query.url).pipe(res);
+            });
+
+            app.get('/config.json', (req, res) => {
+               res.sendFile(path.resolve(__dirname, 'src/config.json'));
             });
         }
     }
