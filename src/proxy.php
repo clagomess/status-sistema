@@ -14,7 +14,7 @@ curl_close($ch);
 $time_elapsed_ms = ceil((microtime(true) - $start) * 1000);
 
 if(empty($httpBody) || $httpCode == 0){
-    $httpBody = sprintf('{"ping": %s, "content": {"erro": "Falha ao conectar! Timeout 10s"}', $time_elapsed_ms);
+    $httpBody = '{"erro": "Falha ao conectar! Timeout 10s"}';
     $httpCode = 500;
     $httpHeader = 'application/json; charset=utf-8';
 }
