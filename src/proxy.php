@@ -17,5 +17,6 @@ if(empty($httpBody) || $httpCode == 0){
 }
 
 header(sprintf("Content-Type: %s", $httpHeader));
-http_response_code($httpCode);
+header("HTTP/1.1 $httpCode OK"); // Para funcionar com PHP < 5.4
+
 echo $httpBody;
