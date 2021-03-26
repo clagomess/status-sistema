@@ -25,7 +25,11 @@ function parse(status){
     }
 
     for(let key in status){
-        html += key+': '+status[key]+'<br>';
+        if(typeof status[key] === 'object'){
+            html += key+':' + '<div style="padding-left: 10px">'+ parse(status[key]) + '</div>';
+        }else{
+            html += key+': '+status[key]+'<br>';
+        }
     }
 
     return html;
@@ -33,8 +37,6 @@ function parse(status){
 
 function checkStatus(obj){
     let url = $(obj).attr('href');
-
-    let initTime = (new Date()).getTime();
 
     $.ajax({
         "type": "GET",
@@ -48,7 +50,8 @@ function checkStatus(obj){
         $(obj).addClass('bg-success');
         $(obj).addClass('text-white');
 
-        $(obj).find('.card-body').html(parse(info));
+        $(obj).find('.card-body').html(parse(info.content));
+        $(obj).find('.badge').text(info.ping + " ms");
     }).fail(function (response, status, xhr) {
         $(obj).removeClass('bg-light');
         $(obj).removeClass('bg-success');
@@ -60,12 +63,10 @@ function checkStatus(obj){
         $(obj).find('.card-body')
             .html('')
             .append(status+': '+xhr+'<br>')
-            .append(parse(response.responseJSON));
+            .append(parse(response.responseJSON.content));
+
+        $(obj).find('.badge').text(response.responseJSON.ping + " ms");
     }).always(function(){
-        let totalTime = (new Date().getTime()) - initTime;
-
-        $(obj).find('.badge').text(totalTime + " ms");
-
         window.setTimeout(function () {
             checkStatus(obj);
         }, 10000);
