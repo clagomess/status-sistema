@@ -63,9 +63,9 @@ function checkStatus(obj){
         $(obj).find('.card-body')
             .html('')
             .append(status+': '+xhr+'<br>')
-            .append(parse(response.responseJSON.content));
+            .append(parse(response.hasOwnProperty('responseJSON') ? response.responseJSON.content : ""));
 
-        $(obj).find('.badge').text(response.responseJSON.ping + " ms");
+        $(obj).find('.badge').text(response.hasOwnProperty('responseJSON') ? response.responseJSON.ping + " ms" : "-");
     }).always(function(){
         window.setTimeout(function () {
             checkStatus(obj);
